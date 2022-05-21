@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  website:
+    image: ${DOCKER_REGISTRY-}website
+    build:
+      context: .
+      dockerfile: src/Website/Dockerfile
+
+  weatherforecast:
+    image: ${DOCKER_REGISTRY-}weatherforecast
+    build:
+      context: .
+      dockerfile: src/WeatherForecast/Dockerfile
+
