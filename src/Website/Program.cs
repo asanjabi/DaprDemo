@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 
 using Website.Data;
 
@@ -10,14 +8,20 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+
+builder.Services.AddHttpClient<WeatherServiceClient>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["WeatherServiceURL"]);
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    _ = app.UseExceptionHandler("/Error");
 }
-
 
 app.UseStaticFiles();
 
