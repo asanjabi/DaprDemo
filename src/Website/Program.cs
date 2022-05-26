@@ -8,10 +8,11 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddSingleton<IWeatherService, WeatherService>();
 builder.Services.AddSingleton<IWeatherForecastClient, WeatherForecastClient>();
+
 builder.Services.AddHttpClient<IWeatherForecastClient, WeatherForecastClient>(client =>
 {
     client.BaseAddress = new Uri(builder.Configuration["WeatherForecastServiceURL"]);
-});
+}).AddHttpMessageHandler(() => new Dapr.Client.InvocationHandler());
 
 var app = builder.Build();
 

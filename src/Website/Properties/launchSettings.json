@@ -24,11 +24,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    //https://docs.microsoft.com/en-us/visualstudio/containers/container-launch-settings?view=vs-2022
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
-      "publishAllPorts": true
+      "publishAllPorts": true,
+      "httpPort": 5101
     }
   }
 }
