@@ -1,7 +1,8 @@
-namespace WeatherForecast;
+namespace WeatherForecast.ForecastData;
 
-public class WeatherForecast
+public class ForecastRecord
 {
+    public int Id { get; set; }
     public DateTime Date { get; set; }
 
     public int TemperatureC { get; set; }

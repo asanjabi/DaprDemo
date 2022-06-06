@@ -6,58 +6,9 @@ services:
     build:
       context: .
       dockerfile: src/Website/Dockerfile
-    ports:
-        - "5101:80"
-    networks:
-      - demo-network
-
-  website-dapr:
-    image: "daprio/daprd"
-    command: ["./daprd",
-     "-app-id", "website",                      #This should be all lowercase for current implementation of the .Net SDK
-     "-app-port", "80",                         #Port application is listening on
-     "-log-level", "debug",
-     "-config", "/configuration/config.yaml",
-     "-components-path", "/components"]
-    volumes:
-      - "./dapr/components/:/components"
-      - "./dapr/configuration/:/configuration"
-    depends_on:
-      - website
-    network_mode: "service:website"
-
-
+  
   weatherforecast:
     image: ${DOCKER_REGISTRY-}weatherforecast
     build:
       context: .
       dockerfile: src/WeatherForecast/Dockerfile
-    networks:
-      - demo-network
-
-  weatherforecast-dapr:
-    image: "daprio/daprd"
-    command: ["./daprd",
-     "-app-id", "weatherforecast-svc",
-     "-app-port", "80",
-     "-log-level", "debug",
-     "-config", "/configuration/config.yaml",
-     "-components-path", "/components"]
-    volumes:
-      - "./dapr/components/:/components"
-      - "./dapr/configuration/:/configuration"
-    depends_on:
-      - weatherforecast
-    network_mode: "service:weatherforecast"
-
-
-  zipkin:
-    image: openzipkin/zipkin
-    command: ["start-zipkin"]
-    ports:
-      - "5411:9411"
-    networks:
-      - demo-network
-
-networks:
-  demo-network:
