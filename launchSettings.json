@@ -11,7 +11,8 @@
         "weatherforecast-dapr": "StartWithoutDebugging",
         "website": "StartDebugging",
         "website-dapr": "StartWithoutDebugging",
-        "zipkin": "StartWithoutDebugging"
+        "zipkin": "StartWithoutDebugging",
+        "opentelemetry": "StartWithoutDebugging"
       }
     }
   }

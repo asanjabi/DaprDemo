@@ -6,6 +6,9 @@
 #Azure CLI settings
 .azure/
 
+#Secrets and environment variables
+.env
+
 # User-specific files
 *.rsuser
 *.suo

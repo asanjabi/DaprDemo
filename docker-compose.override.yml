@@ -9,7 +9,8 @@ services:
     networks:
       - demo-network
     volumes:
-      - "./.azure/:/root/.azure"
+      - "./.azure/:/root/.azure"                #Shared authentication cache for all the containers, make sure to login to Azure in at least one of the containers
+                                                #You can also copy the content of your ~/.azure directory from a Linux environment into .azure directory in the root of the project
 
   website-dapr:
     image: "daprio/daprd"
@@ -60,6 +61,24 @@ services:
       - "5411:9411"
     networks:
       - demo-network
+
+#Opentelemetry collector to forward tracing information to Azure Application Insights
+#Collector is also configured to forward a copy to local zipkin
+#Make sure to update the dapr/configration/config.yaml to send tracing to the correct endpoint
+  opentelemetry:
+    image: otel/opentelemetry-collector-contrib:0.51.0
+    command: ["/otelcol-contrib", "--config=/conf/otel-collector-config.yml"]
+    ports:
+      - "55679:55679" # zpages extension
+      - "1888:1888"   # pprof extension
+      - "13133:13133" # health_check extension
+    volumes:
+      - "./otel-collector/otel-collector-config.yml:/conf/otel-collector-config.yml"
+    networks:
+      - demo-network
+    environment:
+      - AzureInstrumentationKey=${AzureInstrumentationKey}
+
 
 networks:
   demo-network:

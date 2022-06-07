@@ -24,6 +24,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    //For infomation about this section see and how it affects launching of your application.
     //https://docs.microsoft.com/en-us/visualstudio/containers/container-launch-settings?view=vs-2022
     "Docker": {
       "commandName": "Docker",

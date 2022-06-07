@@ -3,6 +3,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
+#Install Azure CLI so we can use DefaultAzureCredential and AAD for authentication
 RUN apt update
 RUN apt install curl -y
 RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
