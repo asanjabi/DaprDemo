@@ -4,6 +4,7 @@ services:
   website:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - APPLICATIONINSIGHTS_CONNECTION_STRING=${APPLICATIONINSIGHTS_CONNECTION_STRING}
     ports:
       - "80"
     networks:
@@ -31,6 +32,7 @@ services:
   weatherforecast:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - APPLICATIONINSIGHTS_CONNECTION_STRING=${APPLICATIONINSIGHTS_CONNECTION_STRING}
     ports:
       - "80"
     networks:
@@ -77,7 +79,7 @@ services:
     networks:
       - demo-network
     environment:
-      - AzureInstrumentationKey=${AzureInstrumentationKey}
+      - APPLICATIONINSIGHTS_INSTRUMENTATION_KEY=${APPLICATIONINSIGHTS_INSTRUMENTATION_KEY}
 
 
 networks:

@@ -7,11 +7,14 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..</DockerfileContext>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+		<UserSecretsId>8630bcbb-c524-4785-b1dc-77188cda57dc</UserSecretsId>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AspNetMonsters.ApplicationInsights.AspNetCore" Version="1.1.24" />
 		<PackageReference Include="Azure.Identity" Version="1.6.0" />
 		<PackageReference Include="Azure.Security.KeyVault.Secrets" Version="4.3.0" />
+		<PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.20.0" />
 		<!--By default EF6 uses version 2.1 of this library, but for AAD Default Auth version 3.0 or higher is required
 		EF7 works out of the box (beta at this time: June 2022)-->
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="4.1.0" />

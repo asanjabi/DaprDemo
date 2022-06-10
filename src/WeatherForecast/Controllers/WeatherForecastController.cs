@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
 using WeatherForecast.ForecastData;
-using Azure.Identity;
-using Azure.Security.KeyVault.Secrets;
 
 namespace WeatherForecast.Controllers;
 [ApiController]
@@ -22,17 +20,11 @@ public class WeatherForecastController : ControllerBase
         this._logger = logger;
         this._context = context;
     }
-   
-    private static readonly string[] _azureSqlScopes = new[]
-    {
-        "https://database.windows.net/.default"
-        //"https://vault.azure.net/.default"
-    };
 
     [HttpGet(Name = "GetWeatherForecast/")]
     public async Task<IEnumerable<ForecastRecord>> Get([FromQuery] DateTime startDate)
     {
-         try
+        try
         {
             var res = await this._context.Database.EnsureCreatedAsync();
 
@@ -43,8 +35,10 @@ public class WeatherForecastController : ControllerBase
 
             var result = this._context.Forecasts.OrderByDescending(rec => rec.Date).Take(5).ToArray();
             return result;
-        }catch(Exception ex)
+        }
+        catch (Exception ex)
         {
+            this._logger.LogError(ex, "Problem connecting to the database");
             throw;
         }
 

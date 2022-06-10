@@ -1,3 +1,5 @@
+using AspNetMonsters.ApplicationInsights.AspNetCore;
+
 using Website.WeatherService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,15 @@ builder.Services.AddHttpClient<IWeatherForecastClient, WeatherForecastClient>(cl
 {
     client.BaseAddress = new Uri(builder.Configuration["WeatherForecastServiceURL"]);
 }).AddHttpMessageHandler(() => new Dapr.Client.InvocationHandler());
+
+//Set the role name to the same value we are using for Dapr app-id so things line up in AppInsights
+//You can also use multiple instances of AppInsights with unique name and instrumentation keys
+//I'm using a nuget package (AspNetMonsters.ApplicationInsights.AspNetCore) for the telemetry provider, but it is fairly easy to implement one without 
+//tanking dependiency on third party code, look at this blog post.
+//https://www.davepaquette.com/archive/2020/02/05/setting-cloud-role-name-in-application-insights.aspx
+builder.Services.AddCloudRoleNameInitializer("website");
+
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 var app = builder.Build();
 

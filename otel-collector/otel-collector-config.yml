@@ -16,7 +16,7 @@ exporters:
     azuremonitor:
         endpoint: "https://dc.services.visualstudio.com/v2/track"
         #instrumentation_key: "<INSTRUMENTATION-KEY>"
-        instrumentation_key: ${AzureInstrumentationKey}
+        instrumentation_key: ${APPLICATIONINSIGHTS_INSTRUMENTATION_KEY}
 
         # maxbatchsize is the maximum number of items that can be
         # queued before calling to the configured endpoint

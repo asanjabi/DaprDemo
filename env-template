@@ -2,7 +2,5 @@
 #Don't checkin .env file
 
 
-#Your Azure Application Insights instrumentation key no spaces or quotes ex:
-#AzureInstrumentationkey=aaaaaaaa-bbb-ccc-ddd-eeeeeeeeeeee
-
-AzureInstrumentationKey=<INSTRUMENTATION-KEY>
+APPLICATIONINSIGHTS_INSTRUMENTATION_KEY=aaaaaaaa-bbb-ccc-ddd-eeeeeeeeeeee
+APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=aaaaaaaa-bbb-ccc-ddd-eeeeeeeeeeee;IngestionEndpoint=https://XXXXX.in.applicationinsights.azure.com/"
