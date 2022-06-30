@@ -19,7 +19,7 @@ builder.Services.AddHttpClient<IWeatherForecastClient, WeatherForecastClient>(cl
 //Set the role name to the same value we are using for Dapr app-id so things line up in AppInsights
 //You can also use multiple instances of AppInsights with unique name and instrumentation keys
 //I'm using a nuget package (AspNetMonsters.ApplicationInsights.AspNetCore) for the telemetry provider, but it is fairly easy to implement one without 
-//tanking dependiency on third party code, look at this blog post.
+//taking dependency on third party code, look at this blog post.
 //https://www.davepaquette.com/archive/2020/02/05/setting-cloud-role-name-in-application-insights.aspx
 builder.Services.AddCloudRoleNameInitializer("website");
 
