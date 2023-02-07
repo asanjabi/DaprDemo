@@ -23,6 +23,12 @@ builder.Services.AddDbContext<WeatherForecastDbContext>(options =>
 //https://www.davepaquette.com/archive/2020/02/05/setting-cloud-role-name-in-application-insights.aspx
 builder.Services.AddCloudRoleNameInitializer("weatherforecast-svc");
 
+string? appInsightsConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+if (!string.IsNullOrEmpty(appInsightsConnectionString))
+{
+    builder.Services.AddApplicationInsightsTelemetry(options => options.ConnectionString = appInsightsConnectionString);
+}
+
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 var app = builder.Build();
