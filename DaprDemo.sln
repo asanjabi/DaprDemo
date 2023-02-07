@@ -12,6 +12,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dapr", "dapr", "{51ECEF93-C1FA-4B0D-8086-DD565F8D9531}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{C02EB5E4-F186-421A-907F-94DFF640C333}"
+	ProjectSection(SolutionItems) = preProject
+		dapr\components\env-secrets.yaml = dapr\components\env-secrets.yaml
+		dapr\components\secret-store.yaml = dapr\components\secret-store.yaml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configuration", "{FC605280-B136-45FD-B23A-F919A646F040}"
 	ProjectSection(SolutionItems) = preProject

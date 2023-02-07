@@ -4,7 +4,6 @@ services:
   website:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - APPLICATIONINSIGHTS_CONNECTION_STRING=${APPLICATIONINSIGHTS_CONNECTION_STRING}
     ports:
       - "80"
     networks:
@@ -16,23 +15,27 @@ services:
   website-dapr:
     image: "daprio/daprd"
     command: ["./daprd",
-     "-app-id", "website",                      #This should be all lowercase for current implementation of the .Net SDK
-     "-app-port", "80",                         #Port application is listening on
-     "-log-level", "debug",
-     "-config", "/configuration/config.yaml",
-     "-components-path", "/components"]
+     "--app-id", "website",                      #This should be all lowercase for current implementation of the .Net SDK
+     "--app-port", "80",                         #Port application is listening on
+     "--log-level", "debug",
+     "--config", "/configuration/config.yaml",
+     "--components-path", "/components"]
     volumes:
       - "./dapr/components/:/components"
       - "./dapr/configuration/:/configuration"
     depends_on:
       - website
     network_mode: "service:website"
+    environment:
+      - SP_PASSWORD=$SP_PASSWORD
+      - SP_TENANT=$SP_TENANT
+      - SP_APPID=$SP_APPID
 
 
   weatherforecast:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - APPLICATIONINSIGHTS_CONNECTION_STRING=${APPLICATIONINSIGHTS_CONNECTION_STRING}
+
     ports:
       - "80"
     networks:
@@ -43,17 +46,21 @@ services:
   weatherforecast-dapr:
     image: "daprio/daprd"
     command: ["./daprd",
-     "-app-id", "weatherforecast-svc",
-     "-app-port", "80",
-     "-log-level", "debug",
-     "-config", "/configuration/config.yaml",
-     "-components-path", "/components"]
+     "--app-id", "weatherforecast-svc",
+     "--app-port", "80",
+     "--log-level", "debug",
+     "--config", "/configuration/config.yaml",
+     "--components-path", "/components"]
     volumes:
       - "./dapr/components/:/components"
       - "./dapr/configuration/:/configuration"
     depends_on:
       - weatherforecast
     network_mode: "service:weatherforecast"
+    environment:
+      - SP_PASSWORD=$SP_PASSWORD
+      - SP_TENANT=$SP_TENANT
+      - SP_APPID=$SP_APPID
 
 
   zipkin:

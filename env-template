@@ -1,6 +1,6 @@
 #Update these values and copy this file to .env in the root of the project
 #Don't checkin .env file
 
-
-APPLICATIONINSIGHTS_INSTRUMENTATION_KEY=aaaaaaaa-bbb-ccc-ddd-eeeeeeeeeeee
-APPLICATIONINSIGHTS_CONNECTION_STRING="InstrumentationKey=aaaaaaaa-bbb-ccc-ddd-eeeeeeeeeeee;IngestionEndpoint=https://XXXXX.in.applicationinsights.azure.com/"
+SP_APPID=aaaaaaaa-bbb-ccc-ddd-eeeeeeeeeeee
+SP_PASSWORD=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+SP_TENANT=aaaaaaaa-bbb-ccc-ddd-eeeeeeeeeeee

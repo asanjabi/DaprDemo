@@ -1,5 +1,8 @@
 using AspNetMonsters.ApplicationInsights.AspNetCore;
 
+using Dapr.Client;
+using Dapr.Extensions.Configuration;
+
 using Microsoft.EntityFrameworkCore;
 
 using WeatherForecast.ForecastData;
@@ -13,6 +16,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var daprClient = new DaprClientBuilder()
+    .Build();
+builder.Configuration.AddDaprSecretStore(config =>
+{
+    config.Store = "azurekeyvault";
+    config.Client = daprClient;
+});
+
 builder.Services.AddDbContext<WeatherForecastDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ForecastDatabaseConnectionString")));
 
@@ -23,13 +34,11 @@ builder.Services.AddDbContext<WeatherForecastDbContext>(options =>
 //https://www.davepaquette.com/archive/2020/02/05/setting-cloud-role-name-in-application-insights.aspx
 builder.Services.AddCloudRoleNameInitializer("weatherforecast-svc");
 
-string? appInsightsConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+string? appInsightsConnectionString = builder.Configuration["APPLICATIONINSIGHTS-CONNECTION-STRING"];
 if (!string.IsNullOrEmpty(appInsightsConnectionString))
 {
     builder.Services.AddApplicationInsightsTelemetry(options => options.ConnectionString = appInsightsConnectionString);
 }
-
-builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 var app = builder.Build();
 

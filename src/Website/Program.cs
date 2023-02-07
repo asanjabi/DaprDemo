@@ -23,7 +23,7 @@ builder.Services.AddHttpClient<IWeatherForecastClient, WeatherForecastClient>(cl
 //https://www.davepaquette.com/archive/2020/02/05/setting-cloud-role-name-in-application-insights.aspx
 builder.Services.AddCloudRoleNameInitializer("website");
 
-string? appInsightsConnectionString = builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"];
+string? appInsightsConnectionString = builder.Configuration["APPLICATIONINSIGHTS-CONNECTION-STRING"];
 if (!string.IsNullOrEmpty(appInsightsConnectionString))
 {
     builder.Services.AddApplicationInsightsTelemetry(options => options.ConnectionString = appInsightsConnectionString);
